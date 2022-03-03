@@ -1,15 +1,13 @@
 <?php
 
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\SubCategoryController;
-use App\Http\Controllers\admin\UploadController;
+use App\Http\Controllers\category\CategoryController;
+use App\Http\Controllers\product\ProductController;
+use App\Http\Controllers\category\SubCategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\voucher\VoucherController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,12 +26,14 @@ Route::prefix('/v1')->group(function(){
             'categories' => CategoryController::class,
             'sub/categories' => SubCategoryController::class,
             'products' => ProductController::class,
+            'vouchers' => VoucherController::class,
         ]);
         
         #custom trash,restore,delete,change-status
         multipleResourceUrl('/categories',Category::class);
         multipleResourceUrl('/sub/categories',SubCategory::class);
         multipleResourceUrl('/products',Product::class);
+        multipleResourceUrl('/vouchers',Product::class);
     });
 });
 

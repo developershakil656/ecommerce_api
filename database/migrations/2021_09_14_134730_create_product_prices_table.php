@@ -15,12 +15,12 @@ class CreateProductPricesTable extends Migration
     {
         Schema::create('product_prices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id')->unique();
+            $table->unsignedBigInteger('product_id');
             $table->decimal('cost_price',10,0);
             $table->decimal('retail_price',10,0);
             $table->decimal('discount_price',10,0)->nullable();
-            $table->date('discount_start')->nullable();
-            $table->date('discount_end')->nullable();
+            $table->dateTime('discount_start')->nullable();
+            $table->dateTime('discount_end')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CreatorMiddleware
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class CreatorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->tokenCan('creator'))
+        if ($request->user()->tokenCan('user'))
             return $next($request);
         else
-            return send_response(false,'only User can access this route',null,401);
+            return send_response(false,'only authenticate user can access this route',null,401);
     }
 }

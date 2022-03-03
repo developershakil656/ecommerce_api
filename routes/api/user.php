@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\order\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,20 +8,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function(){
     Route::middleware(['auth:user-api','user'])->group(function(){
-        #post management
-        Route::apiResource('post',PostController::class);
+        Route::post('/make/order',[OrderController::class,'store']);
+        Route::get('/view/all/order',[OrderController::class,'index']);
     });
 
     #user management
-    Route::prefix('user')->group(function(){
-        Route::post('/login',[UserController::class,'login']);
-        Route::post('/register',[UserController::class,'register']);
-        #user logout
-        Route::post('/logout',[UserController::class,'logout'])->middleware('auth:user-api','user');
-    });
+    Route::post('/login',[UserController::class,'login']);
+    Route::post('/register',[UserController::class,'register']);
+    #user logout
+    Route::post('/logout',[UserController::class,'logout'])->middleware('auth:user-api','user');
 
-    #posts
-    Route::get("/posts",[PostController::class,'posts']);
 });
 
 Route::get('login',function(){

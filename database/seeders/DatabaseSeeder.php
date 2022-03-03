@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ProductSizeSeeder::class
         ]);
         \App\Models\Admin::factory(4)->create();
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(5)->create();
         // \App\Models\Post::factory(15)->create();
         \App\Models\Category::factory(15)->create();
         \App\Models\SubCategory::factory(20)->create();
@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProductColor::factory(5)->create();
         \App\Models\ProductStock::factory(10)->create();
         \App\Models\ProductPrice::factory(10)->create();
+
+        \App\Models\ShippingAddress::factory(10)->create();
     }
 }

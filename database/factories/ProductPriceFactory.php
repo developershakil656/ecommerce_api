@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ProductPrice;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
 
 class ProductPriceFactory extends Factory
 {
@@ -26,8 +27,8 @@ class ProductPriceFactory extends Factory
             'cost_price' => rand(100,500),
             'retail_price' => rand(1000,5000),
             'discount_price' => rand(500,1000),
-            'discount_start' => $this->faker->date(),
-            'discount_end' => $this->faker->date(),
+            'discount_start' => $this->faker->dateTime(),
+            'discount_end' => $this->faker->dateTime(),
         ];
     }
 }

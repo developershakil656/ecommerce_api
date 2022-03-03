@@ -1,0 +1,22 @@
+name: User/Order
+description: |-
+
+  APIs for managing Users Order
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/make/order
+    metadata:
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses: []
+    responseFields: []

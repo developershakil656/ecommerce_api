@@ -35,15 +35,15 @@ function slugify($text)
 }
 
 // api response
-function send_response($status, $message = '', $data = null)
+function send_response($status, $message = '', $data = null,$status_code=200)
 {
     $res = [
         'status' => $status,
         'message' => $message,
-        'data' => $data
+        'data' => $data,
     ];
 
-    return response()->json($res);
+    return response()->json($res,$status_code);
 }
 
 #multiple delete,update,trash,restore url
@@ -58,7 +58,7 @@ function send_response($status, $message = '', $data = null)
 //     return $res;
 // }
 #------------------------------------------- multiple resource url and contorler start------------------------------------
-#multiple delete,update,trash,restore url
+#multiple store,delete,update,trash,restore url
 function multipleResourceUrl($url,$model)
 {
     $res = Route::prefix($url)->group(function() use($model){
@@ -155,7 +155,7 @@ function restore(Request $request,$model)
 
 # multiple resource url controller validation
 function resource_validation($request,$status=false){
-    $status=$status ? 'required':'';
+    $status=$status ? 'required|in:active,inactive':'';
     $validator = Validator::make($request->all(), [
         'data' => 'required',
         'status' => $status

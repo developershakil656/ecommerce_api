@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ProductStockController;
-use App\Http\Controllers\admin\UploadController;
+use App\Http\Controllers\voucher\VoucherController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('documentation');
 });
+
+
+Route::post('/check',[VoucherController::class, 'check']);
+// Route::post('/order',[OrderController::class, 'store']);
 
 // Route::post('/images',[UploadController::class,'store']);
 

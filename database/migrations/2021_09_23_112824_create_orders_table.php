@@ -15,13 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipping_address_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('user_name');
-            $table->string('user_number');
-            $table->string('payment_type');
-            $table->string('payment_status',3)->default(0);
-            $table->string('order_status',3)->default(0);
+            $table->decimal('total_price')->default(0);
+            $table->integer('total_items')->default(0);
+            $table->decimal('shipping_charge')->default(0);
+            $table->decimal('voucher_discount')->nullable();
+            $table->string('voucher')->nullable();
+            $table->enum('status',['pending','prossesing','delivering','complated'])->default('pending');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

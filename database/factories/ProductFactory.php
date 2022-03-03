@@ -28,6 +28,9 @@ class ProductFactory extends Factory
             'slug' => $this->faker->slug(),
             'thumbnail' => $this->faker->imageUrl(),
             'on_stock' => rand(10,50),
+            'created_by_role' => "creator" || "admin",
+            'created_by_id' => rand(1,10),
+            'on_stock' => rand(10,50),
         ];
     }
 }

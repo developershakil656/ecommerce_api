@@ -18,8 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->string('slug');
-            $table->boolean('status',[0,1])->default(0);
-            $table->softDeletes();
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();

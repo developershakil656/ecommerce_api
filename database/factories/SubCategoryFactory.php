@@ -25,7 +25,7 @@ class SubCategoryFactory extends Factory
             'category_id' => rand(1,5),
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
-            'status' =>rand(0,1)
+            'status' =>"inactive"
         ];
     }
 }

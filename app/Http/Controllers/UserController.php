@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Creator;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group User/Authentication
+ *
+ * APIs for managing Users
+ */
 class UserController extends Controller
 {
     /**
@@ -29,11 +33,11 @@ class UserController extends Controller
 
         $credentials = $request->only('email','password');
         if (Auth::attempt($credentials)) {
-            // config(['auth.guards.api.provider' => 'creator']);
+            // config(['auth.guards.api.provider' => 'user']);
 
-            $creator          = Auth::user();
-            $data['creator']  = $creator;
-            $data['token'] = $creator->createToken('AccessToken',['creator'])->accessToken;
+            $user          = Auth::user();
+            $data['user']  = $user;
+            $data['token'] = $user->createToken('AccessToken',['user'])->accessToken;
 
             return send_response(true, 'You are successfully logged in.',$data);
         } else {
@@ -51,21 +55,24 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'     => 'required',
-            'email'    => 'required|email|unique:creators',
-            'password' => 'required|min:8'
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'number' => 'required|unique:users'
         ]);
 
         if ($validator->fails()) return send_response(false,'Validation Error!', $validator->errors(), 422);
 
+        
         // try {
-            $creator =new User();
-            $creator->name = $request->name;
-            $creator->email = $request->email;
-            $creator->password = Hash::make($request->password);
-            $creator->save();
+            $user =new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->number = $request->number;
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-            $data['creator']  = $creator;
-            $data['token'] = $creator->createToken('creatorToken')->accessToken;
+            $data['user']  = $user;
+            $data['token'] = $user->createToken('AccessToken',['user'])->accessToken;
 
             return send_response(true, 'registration successfully complated.',$data);
         // } catch (Exception $e) {

@@ -24,7 +24,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
-            'status' =>rand(0,1)
+            'status' =>'action' || 'inactive'
         ];
     }
 }

@@ -16,12 +16,14 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('sub_category_id');
+            $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->string('name');
             $table->longText('thumbnail')->nullable();
             $table->string('slug')->unique();
             $table->integer('on_stock')->default(0);
-            $table->boolean('status',[0,1])->default(0);
+            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('created_by_role');
+            $table->string('created_by_id');
             $table->softDeletes();
             $table->timestamps();
             

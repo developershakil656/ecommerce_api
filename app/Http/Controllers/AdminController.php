@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Creator;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Admin/Authentication
+ *
+ * APIs for managing Admin
+ */
 class AdminController extends Controller
 {
     public function Login(Request $request)
@@ -18,7 +21,7 @@ class AdminController extends Controller
         ]);
 
         if ($validator->fails()) 
-            return send_response(false,'validation error!',$validator->errors());
+            return send_response(false,'validation error!',$validator->errors(),422);
 
         $credentials = $request->only('email','password');
         if (Auth::guard('admin')->attempt($credentials)) {
@@ -39,14 +42,5 @@ class AdminController extends Controller
     {
         $request->user()->token()->revoke();
         return send_response(true, 'You are successfully logged out Admin.');
-    }
-
-
-
-    #creator management
-    public function creators()
-    {
-        $creators = User::all();
-        return send_response(true,'',$creators);
     }
 }
